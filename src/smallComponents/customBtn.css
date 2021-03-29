@@ -1,0 +1,27 @@
+.customDefault {
+    float: right;
+    font-family: Roboto Mono, monospace;
+    font-weight: 500;
+    padding: 10px 14px;
+    border-radius: 2px 8px 8px 8px;
+    color: white;
+    border: none;
+    outline: none;
+    transition: .05s ease-in;
+    cursor: pointer;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.35);
+}
+
+.customDefault:focus {
+    outline: none;
+}
+
+.customDefault:active{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.55);
+    outline: none;
+}
+
+.customDefault span {
+ display: inline-block;
+ vertical-align: middle;
+}

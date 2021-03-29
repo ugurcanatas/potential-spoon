@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./card.css";
 import { CustomButton } from "../smallComponents/CustomButton";
 
@@ -24,6 +24,9 @@ export const ShortcutCard = () => {
   const [tableRow, setTableRow] = useState("1");
   const [tableColumn, setTableColumn] = useState("1");
 
+  const [show, setShowCard] = useState("0");
+  const [isVisible, setIsVisible] = useState(false);
+
   const getHeaderValue = () => {
     console.log("Get header", inputHeader);
   };
@@ -32,16 +35,35 @@ export const ShortcutCard = () => {
     console.log("Getting todo value");
   };
 
+  useEffect(() => {
+    if (isVisible) {
+      setShowCard("1");
+    } else {
+      setShowCard("0");
+    }
+  }, [isVisible]);
+
+  const showShortcut = () => {
+    console.log("ASDASDAS");
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div>
       <a
-        className="btnShortcutCardToggle material-icons shadow-xl bg-green-700 hover:bg-indigo-700 transition-colors"
+        className="btnShortcutCardToggle material-icons shadow-xl bg-green-700 hover:bg-indigo-700 transition-colors left-4 bottom-4"
         color="#9861f1"
         href="# "
+        onClick={() => showShortcut()}
       >
-        <span className="text-white">visibility</span>
+        <span className="text-white">
+          {isVisible ? "visibility_off" : "visibility"}
+        </span>
       </a>
-      <div className="shortcutCard shadow-lg p-6">
+      <div
+        data-show={show}
+        className="shortcutCard bg-gray-50 left-4 top-4 shadow-xl p-6"
+      >
         <div className="flex flex-col">
           <h2 className="text-4xl font-medium">Shortcuts</h2>
           <div className="seperator my-4" />
@@ -74,9 +96,9 @@ export const ShortcutCard = () => {
           </div>
         </div>
         <div className="seperator my-8" />
-        <div className="flex flex-col mb-4">
-          <div className="flex flex-row">
-            <div className="flex-col flex">
+        <div className="flex flex-col mb-4 ">
+          <div className="grid grid-cols-2">
+            <div className="flex-col flex col-span-1">
               <label>Nesting</label>
               <input
                 min="1"
@@ -87,7 +109,7 @@ export const ShortcutCard = () => {
                 placeholder="Nesting"
               />
             </div>
-            <div className="flex-col flex">
+            <div className="flex-col flex col-span-1">
               <label>Count</label>
               <input
                 min="1"
@@ -111,8 +133,8 @@ export const ShortcutCard = () => {
         </div>
         <div className="seperator my-8" />
         <div className="flex flex-col mb-4">
-          <div className="flex flex-row">
-            <div className="flex-col flex">
+          <div className="grid grid-cols-2">
+            <div className="flex-col flex col-span-1">
               <label>Row</label>
               <input
                 min="1"
@@ -123,7 +145,7 @@ export const ShortcutCard = () => {
                 placeholder="Row"
               />
             </div>
-            <div className="flex-col flex">
+            <div className="flex-col flex col-span-1">
               <label>Column</label>
               <input
                 min="1"
